@@ -1,6 +1,20 @@
-module CloseEvent = CloseEvent;
+module CloseEvent: {
+    type t;
+    type code =
+        | NormalClosure | GoingAway | ProtocolError | UnsupportedData | NoStatusRecvd
+        | AbnormalClosure | InvalidFramePayloadData | PolicyViolation | MessageTooBig
+        | MissingExtension | InternalError | ServiceRestart | TryAgainLater
+        | BadGateway | TLSHandshake | Custom(int);
+    let code: t => code;
+    let reason: t => string;
+    let wasClean: t => bool;
+};
+module MessageEvent: {
+    type t;
+    let data: t => string;
+    let origin: t => string;
+};
 module ErrorEvent: { type t; };
-module MessageEvent = MessageEvent;
 module OpenEvent: { type t; };
 
 type t;
