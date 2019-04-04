@@ -1,6 +1,6 @@
 {
   "name": "@ryb73/bs-websockets",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Bucklescript bindings for the WebSocket API",
   "main": "index.js",
   "repository": {
