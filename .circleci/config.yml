@@ -38,7 +38,7 @@ jobs:
                     - node_modules
             - run: npm run build
             - persist_to_workspace:
-                root: ~/project
+                root: &root ~/project
                 paths: .
             - run: yarn test
     publish:
@@ -46,6 +46,6 @@ jobs:
         steps:
             - run: pwd
             - attach_workspace:
-                at: ~/repo
+                at: *root
             - run: ls
             - run: yarn publish
