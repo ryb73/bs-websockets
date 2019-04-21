@@ -17,8 +17,8 @@ workflows:
             - publish:
                 requires: [ hold ]
                 filters:
-                  tags: {only: /^v\d*\.\d*\.\d*/}
-                  branches: master
+                    tags: {only: /^v\d*\.\d*\.\d*/}
+                    branches: master
 
 jobs:
     install:
