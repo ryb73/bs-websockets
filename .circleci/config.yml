@@ -41,4 +41,5 @@ jobs:
     publish:
         <<: *defaults
         steps:
+            - run: ls
             - run: yarn publish
