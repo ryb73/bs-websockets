@@ -31,11 +31,11 @@ jobs:
             - restore-cache:
                 key: node_modules
             - run: yarn
+            - run: npm i bs-platform
             - save-cache:
                 key: node_modules
                 paths:
                     - node_modules
-            - run: ls
             - run: npm run build
             - run: yarn test
     publish:
