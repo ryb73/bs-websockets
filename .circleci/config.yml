@@ -11,7 +11,7 @@ workflows:
     jobs:
     - install
     - build
-    - test
+    - test
     - hold:
       type: approval
     - publish:
