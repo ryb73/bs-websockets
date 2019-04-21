@@ -33,15 +33,15 @@ jobs:
                 key: node_modules
                 paths:
                     - node_modules
-        build:
-            <<: *defaults
-            steps:
-                - run: npm run build
-        test:
-            <<: *defaults
-            steps:
-                - run: yarn test
-        publish:
-            <<: *defaults
-            steps:
-                - run: yarn publish
+    build:
+        <<: *defaults
+        steps:
+            - run: npm run build
+    test:
+        <<: *defaults
+        steps:
+            - run: yarn test
+    publish:
+        <<: *defaults
+        steps:
+            - run: yarn publish
