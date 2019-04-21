@@ -1,47 +1,47 @@
 version: 2
 
 defaults: &defaults
-  working_directory: ~/spotify-to-youtube
-  docker:
-  - image: circleci/node:latest
+    working_directory: ~/spotify-to-youtube
+    docker:
+        - image: circleci/node:latest
 
 workflows:
-  version: 2
-  go:
-    jobs:
-    - install
-    - build
-    - test
-    - hold:
-      type: approval
-    - publish:
-      requires: [ hold ]
-      filters:
-        tags: {only: /^v\d*\.\d*\.\d*/}
-        branches: master
+    version: 2
+    go:
+        jobs:
+            - install
+            - build
+            - test
+            - hold:
+                type: approval
+            - publish:
+                requires: [ hold ]
+                filters:
+                  tags: {only: /^v\d*\.\d*\.\d*/}
+                  branches: master
 
 jobs:
-  install:
-    <<: *defaults
-    steps:
-    - checkout
-    - restore-cache:
-      key: node_modules
-    - run: npm i -g yarn
-    - run: yarn
-    - save-cache:
-      key: node_modules
-      paths:
-        - node_modules
-  build:
-    <<: *defaults
-    steps:
-    - run: npm run build
-  test:
-    <<: *defaults
-    steps:
-    - run: yarn test
-  publish:
-    <<: *defaults
-    steps:
-    - run: yarn publish
+    install:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore-cache:
+                key: node_modules
+            - run: npm i -g yarn
+            - run: yarn
+            - save-cache:
+                key: node_modules
+                paths:
+                    - node_modules
+        build:
+            <<: *defaults
+            steps:
+                - run: npm run build
+        test:
+            <<: *defaults
+            steps:
+                - run: yarn test
+        publish:
+            <<: *defaults
+            steps:
+                - run: yarn publish
