@@ -14,9 +14,7 @@ workflows:
     version: 2
     go:
         jobs:
-            - install
-            - build: { requires: [install] }
-            - test: { requires: [build] }
+            - test
             - hold:
                 requires: [ test ]
                 type: approval
@@ -26,7 +24,7 @@ workflows:
                 <<: *filter-publish
 
 jobs:
-    install:
+    test:
         <<: *defaults
         steps:
             - checkout
@@ -37,13 +35,8 @@ jobs:
                 key: node_modules
                 paths:
                     - node_modules
-    build:
-        <<: *defaults
-        steps:
+            - run: ls
             - run: npm run build
-    test:
-        <<: *defaults
-        steps:
             - run: yarn test
     publish:
         <<: *defaults
