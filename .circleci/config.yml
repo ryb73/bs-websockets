@@ -5,20 +5,25 @@ defaults: &defaults
     docker:
         - image: circleci/node:latest
 
+filter-publish: &filter-publish
+    filters:
+        tags: {only: /^v\d*\.\d*\.\d*/}
+        branches: { only: [master] }
+
 workflows:
     version: 2
     go:
         jobs:
             - install
-            - build
-            - test
+            - build: { requires: [install] }
+            - test: { requires: [build] }
             - hold:
+                requires: [ test ]
                 type: approval
+                <<: *filter-publish
             - publish:
                 requires: [ hold ]
-                filters:
-                    tags: {only: /^v\d*\.\d*\.\d*/}
-                    branches: { only: [master] }
+                <<: *filter-publish
 
 jobs:
     install:
