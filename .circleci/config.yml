@@ -44,8 +44,7 @@ jobs:
     publish:
         <<: *defaults
         steps:
-            - run: pwd
             - attach_workspace:
                 at: *root
-            - run: ls
+            - run: "echo \"//registry.npmjs.org/:_authToken=$npm_TOKEN\" > ~/.npmrc"
             - run: yarn publish
