@@ -1,7 +1,6 @@
 version: 2
 
 defaults: &defaults
-    working_directory: ~/spotify-to-youtube
     docker:
         - image: circleci/node:latest
 
@@ -27,6 +26,7 @@ jobs:
     test:
         <<: *defaults
         steps:
+            - run: pwd
             - checkout
             - restore-cache:
                 key: node_modules
@@ -37,9 +37,15 @@ jobs:
                 paths:
                     - node_modules
             - run: npm run build
+            - persist_to_workspace:
+                root: ~/project
+                paths: .
             - run: yarn test
     publish:
         <<: *defaults
         steps:
+            - run: pwd
+            - attach_workspace:
+                at: ~/repo
             - run: ls
             - run: yarn publish
