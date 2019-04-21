@@ -32,7 +32,6 @@ jobs:
             - checkout
             - restore-cache:
                 key: node_modules
-            - run: npm i -g yarn
             - run: yarn
             - save-cache:
                 key: node_modules
