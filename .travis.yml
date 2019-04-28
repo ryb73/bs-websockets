@@ -3,8 +3,8 @@ cache: yarn
 node_js: ["11"]
 script:
 - npm i bs-platform
-- npm run build
-- npm test
+- yarn build
+- yarn test
 deploy:
   skip_cleanup: true
   provider: npm
