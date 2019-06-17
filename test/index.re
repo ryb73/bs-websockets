@@ -6,6 +6,7 @@ let send = (ws, msg) =>
     Js.Global.setTimeout(() => BsWebSocket.send(ws, msg), 2000)
     |> ignore;
 
+onError(ws, Js.log2("error"));
 onOpen(ws, e => {
     onClose(ws, e => {
         Js.log2("Close", e);
@@ -13,7 +14,6 @@ onOpen(ws, e => {
         Js.log2("reason", CloseEvent.reason(e));
         Js.log2("wasClean", CloseEvent.wasClean(e));
     });
-    onError(ws, Js.log2("error"));
 
     Js.log2("Open", e);
     send(ws, "one");
@@ -31,4 +31,4 @@ onMessage(ws, e => {
 });
 
 Js.log2("url:", url(ws));
-Js.log2("rs:", readyState(ws) == Connecting);
+Js.log2("connecting?", readyState(ws) == Connecting);
