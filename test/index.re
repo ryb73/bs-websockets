@@ -1,6 +1,6 @@
 open BsWebSocket;
 
-let ws = make("wss://echo.websocket.org");
+let ws = make("wss://echo.websocket.org", ());
 
 let send = (ws, msg) =>
     Js.Global.setTimeout(() => BsWebSocket.send(ws, msg), 2000)
