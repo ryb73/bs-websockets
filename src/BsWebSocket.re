@@ -7,7 +7,8 @@ module ErrorEvent = { type t; };
 module MessageEvent = MessageEvent;
 module OpenEvent = { type t; };
 
-[@bs.new] external make: (string, ~protocol: string=?, unit) => t = "WebSocket";
+[@bs.new] external make: (string, ~protocols: array(string)=?, unit) => t = "WebSocket";
+let make = (~protocols=?, url) => make(url, ~protocols?, ());
 
 [@bs.set] external onClose: t => (CloseEvent.t => unit) => unit = "onclose";
 [@bs.set] external onError: t => (ErrorEvent.t => unit) => unit = "onerror";
