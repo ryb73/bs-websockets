@@ -19,7 +19,7 @@ module OpenEvent: { type t; };
 
 type t;
 
-let make: string => t;
+let make: (~protocols: array(string)=?, string) => t;
 let onClose: (t, CloseEvent.t => unit) => unit;
 let onError: (t, ErrorEvent.t => unit) => unit;
 let onMessage: (t, MessageEvent.t => unit) => unit;
